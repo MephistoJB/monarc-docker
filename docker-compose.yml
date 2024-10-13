@@ -12,7 +12,7 @@ services:
       - MONARC_VERSION=v2.12.6
       - DB_PORT=3308
       - DB_ROOT_PASSWORD=tops3cret§
-      - DB_PASSWORD= anothers3cret!
+      - DB_PASSWORD=anothers3cret!
     volumes:
       - monarc_data:/var/lib/monarc/fo-data
 
