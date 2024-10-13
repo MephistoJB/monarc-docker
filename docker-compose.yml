@@ -24,8 +24,6 @@ services:
       - MYSQL_USER=monarc
       - MYSQL_PASSWORD=anothers3cret!
       - MYSQL_TCP_PORT=3306
-    ports:
-      - "3308:3308"
     volumes:
       - db_data:/var/lib/mysql
 
