@@ -43,8 +43,8 @@ echo "Create $DB_COMMON_NAME db"
 echo "CREATE DATABASE IF NOT EXISTS $DB_COMMON_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD
 
 echo "Initialize the common database"
-mysql -h $DB_HOST -P $DB_PORT-u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_structure.sql
-mysql -h $DB_HOST -P $DB_PORT-u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_data.sql
+mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_structure.sql
+mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_data.sql
 
 echo "Create $DB_CLI_NAME db"
 echo "DROP DATABASE $DB_CLI_NAME;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -P $DB_PORT
