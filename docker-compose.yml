@@ -5,11 +5,14 @@ services:
   monarc:
     build: .
     ports:
-      - "80:80"
+      - "83:80"
     depends_on:
       - db
     environment:
       - MONARC_VERSION=v2.12.6
+      - DB_PORT=3308
+      - DB_ROOT_PASSWORD=tops3cret§
+      - DB_PASSWORD= anothers3cret!
     volumes:
       - monarc_data:/var/lib/monarc/fo-data
 
@@ -20,8 +23,9 @@ services:
       - MYSQL_DATABASE=monarc_cli
       - MYSQL_USER=monarc
       - MYSQL_PASSWORD=anothers3cret!
+      - MYSQL_TCP_PORT=3308
     ports:
-      - "3306:3306"
+      - "3308:3308"
     volumes:
       - db_data:/var/lib/mysql
 
