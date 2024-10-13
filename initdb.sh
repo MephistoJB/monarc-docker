@@ -20,14 +20,14 @@ retry=0
 connected=0
 
 while [ $retry -lt $MAX_RETRIES ]; do
-    mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -D $DB_CLI_NAME -e "SELECT 1;" >/dev/null 2>&1
+    mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -D $DB_CLI_NAME -P $DB_DB_PORT-e "SELECT 1;" >/dev/null 2>&1
     if [ $? -eq 0 ]; then
         connected=1
         echo "Connection to database successful."
         break
     fi
 
-    echo "Could not connect to database $DB_CLI_NAME at $DB_HOST using $DB_USER. Retrying in $RETRY_DELAY seconds..."
+    echo "Could not connect to database $DB_CLI_NAME at $DB_HOST and Port $DB_PORT using $DB_USER. Retrying in $RETRY_DELAY seconds..."
     sleep $RETRY_DELAY
     retry=$((retry + 1))
 done
