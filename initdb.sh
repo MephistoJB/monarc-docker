@@ -56,11 +56,13 @@ cat > /var/lib/monarc/fo/data/backup/credentialsmysql.cnf <<EOF
 host     = $DB_HOST
 user     = $DB_USER
 password = $DB_PASSWORD
+port = $DB_PORT
 socket   = /var/run/mysqld/mysqld.sock
 [mysql_upgrade]
 host     = $DB_HOST
 user     = $DB_USER
 password = $DB_PASSWORD
+port = $DB_PORT
 socket   = /var/run/mysqld/mysqld.sock
 basedir  = /usr
 EOF
