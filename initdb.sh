@@ -20,7 +20,7 @@ retry=0
 connected=0
 
 while [ $retry -lt $MAX_RETRIES ]; do
-    mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -D $DB_CLI_NAME -P $DB_PORT -e "SELECT 1;" >/dev/null 2>&1
+    mysql -h $DB_HOST -u $DB_USER --password=$DB_PASSWORD -D $DB_CLI_NAME -P $DB_PORT -e "SELECT 1;" >/dev/null 2>&1
     if [ $? -eq 0 ]; then
         connected=1
         echo "Connection to database successful."
