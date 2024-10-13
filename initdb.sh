@@ -37,7 +37,7 @@ if [ $connected -ne 1 ]; then
     exit 1
 fi
 
-echo "GRANT ALL PRIVILEGES ON * . * TO 'monarc'@'%'" | mysql -h $DB_HOST  -P $DB_PORT-u root -p$DB_ROOT_PASSWORD
+echo "GRANT ALL PRIVILEGES ON * . * TO 'monarc'@'%'" | mysql -h $DB_HOST  -P $DB_PORT -u root -p$DB_ROOT_PASSWORD
 
 echo "Create $DB_COMMON_NAME db"
 echo "CREATE DATABASE IF NOT EXISTS $DB_COMMON_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD
