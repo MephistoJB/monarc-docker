@@ -10,7 +10,7 @@ services:
       - db
     environment:
       - MONARC_VERSION=v2.12.6
-      - DB_PORT=3308
+      - DB_PORT=3306
       - DB_ROOT_PASSWORD=tops3cret§
       - DB_PASSWORD=anothers3cret!
     volumes:
@@ -23,7 +23,7 @@ services:
       - MYSQL_DATABASE=monarc_cli
       - MYSQL_USER=monarc
       - MYSQL_PASSWORD=anothers3cret!
-      - MYSQL_TCP_PORT=3308
+      - MYSQL_TCP_PORT=3306
     ports:
       - "3308:3308"
     volumes:
