@@ -20,7 +20,7 @@ retry=0
 connected=0
 
 while [ $retry -lt $MAX_RETRIES ]; do
-    mysql -h $DB_HOST -u $DB_USER --password=$DB_PASSWORD -D $DB_CLI_NAME -P $DB_PORT -e "SELECT 1;" >/dev/null 2>&1
+    mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -D $DB_CLI_NAME -e "SELECT 1;" >/dev/null 2>&1
     if [ $? -eq 0 ]; then
         connected=1
         echo "Connection to database successful."
@@ -37,18 +37,18 @@ if [ $connected -ne 1 ]; then
     exit 1
 fi
 
-echo "GRANT ALL PRIVILEGES ON * . * TO 'monarc'@'%'" | mysql -h $DB_HOST -u root -p$DB_ROOT_PASSWORD
+echo "GRANT ALL PRIVILEGES ON * . * TO 'monarc'@'%'" | mysql -h $DB_HOST  -P $DB_PORT-u root -p$DB_ROOT_PASSWORD
 
 echo "Create $DB_COMMON_NAME db"
-echo "CREATE DATABASE IF NOT EXISTS $DB_COMMON_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD
+echo "CREATE DATABASE IF NOT EXISTS $DB_COMMON_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD
 
 echo "Initialize the common database"
-mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_structure.sql
-mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_data.sql
+mysql -h $DB_HOST -P $DB_PORT-u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_structure.sql
+mysql -h $DB_HOST -P $DB_PORT-u $DB_USER -p$DB_PASSWORD $DB_COMMON_NAME < $PATH_TO_MONARC/db-bootstrap/monarc_data.sql
 
 echo "Create $DB_CLI_NAME db"
-echo "DROP DATABASE $DB_CLI_NAME;" | mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD
-echo "CREATE DATABASE $DB_CLI_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD
+echo "DROP DATABASE $DB_CLI_NAME;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -P $DB_PORT
+echo "CREATE DATABASE $DB_CLI_NAME DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;" | mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD -P $DB_PORT
 
 echo "create database backup configuration"
 cat > /var/lib/monarc/fo/data/backup/credentialsmysql.cnf <<EOF
